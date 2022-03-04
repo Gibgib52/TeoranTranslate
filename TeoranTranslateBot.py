@@ -12,6 +12,8 @@ from discord.ext import commands
 import json
 import os
 
+# import time
+
 # token loading and config
 if os.path.exists(os.getcwd() + "/config.json"):
     with open("./config.json") as f:
@@ -45,23 +47,23 @@ async def ping(ctx):
 # echoes anything you put in quotes
 @bot.command()
 async def echo(ctx, string):
-    await ctx.send(string)
+    await ctx.send("Echo : {}".format(string))
     print("Echoing {}".format(string))
 
 @bot.command()
 async def help(ctx):
     helpmsg = """
-    Commands:
-    `{pre}help` : Echoes help
-    `{pre}echo "string"` : Echoes a string
-    `{pre}ping` : Echoes latency
-    `{pre}translate "string"` : Translates a string into Teoran
+    <:Teoran_c:949162522336956436> Commands:
+        `{pre}help` : Echoes help
+        `{pre}echo "string"` : Echoes a string
+        `{pre}ping` : Echoes latency
+        `{pre}translate "string"` : Translates a string into Teoran
 
-    Info:
+    <:Teoran_g:949162522173386752> Info:
         Accepts letters in any case but 
         only translates into lowercase Teoran.
 
-        `https://github.com/Gibgib52/TeoranTranslate`
+    `https://github.com/Gibgib52/TeoranTranslate`
     """.format(pre=prefix)
 
     await ctx.send(helpmsg)
@@ -104,7 +106,21 @@ async def translate(ctx, string):
     translatedString = preppedString.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
+    # TODO: fix size arg.
+    # if size == "s":
+    #     translatemessage = """
+    #     '{}' translates to:
+    #     {}
+    #     """
+    #     await ctx.send(translatemessage.format(preppedString, translatedString))
+    # # if invalid size or no size
+    # else:
+    #     await ctx.send("{} translates to:")
+    #     await ctx.send(translatedString)
+
+    await ctx.send("{} translates to:".format(string))
     await ctx.send(translatedString)
+    
     print("Translating '{}' To {}".format(string, translatedString))
 
 bot.run(token)
