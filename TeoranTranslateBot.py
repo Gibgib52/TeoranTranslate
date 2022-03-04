@@ -56,8 +56,8 @@ async def help(ctx):
     `{pre}translate "string"` : Translates a string into Teoran
 
     Info:
-        Accepts any case letter but 
-        Only translates into lowercase Teoran.
+        Accepts letters in any case but 
+        only translates into lowercase Teoran.
 
         `https://github.com/Gibgib52/TeoranTranslate`
     """.format(pre=prefix)
