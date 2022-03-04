@@ -42,7 +42,7 @@ async def echoToOwner(string):
         await owner.send(logstring)
     print(logstring)
 
-# logon message and dm when online
+# logon message
 @bot.event
 async def on_ready():
     await echoToOwner("Logged in as {}".format(bot))
