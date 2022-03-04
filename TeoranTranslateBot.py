@@ -2,6 +2,8 @@
     Translates english into "Teoran" from Gwain Saga through a discord bot.
 
     used https://www.youtube.com/watch?v=bq80J5rh4Cc as template
+
+    uses Teoran Font v1.04 from https://fontstruct.com/fontstructions/show/1833685/teoran-font-v1-04 in the discord server for emojis
 """
 
 import discord
@@ -50,7 +52,7 @@ async def translate(ctx, string):
         "d": ":Teoran_d: ",
         "e": ":Teoran_e: ",
         "f": ":Teoran_f: ",
-        "g": ":Teoran_g: ",
+        "g": "<:Teoran_g:949150356271673394> ",
         "h": ":Teoran_h: ",
         "i": ":Teoran_i: ",
         "j": ":Teoran_j: ",
