@@ -28,10 +28,12 @@ prefix = configData["Prefix"]
 
 bot = commands.Bot(command_prefix=prefix, help_command=None)
 
-# logon message
+# logon message and dm when online
 @bot.event
 async def on_ready():
     print("Logged in as {}".format(bot))
+    owner = await bot.fetch_user(224236821410873346) # my discord user id
+    await owner.send("Bot is logged in.")
 
 # echoes the latency
 @bot.command()
