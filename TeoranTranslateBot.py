@@ -20,40 +20,48 @@ if os.path.exists(os.getcwd() + "/config.json"):
         configData = json.load(f)
 
 else:
-    configTemplate = {"Token": "", "Prefix": "$"}
+    configTemplate = {"Token": "", "Prefix": "$", "OwnerID": "", "Dmlogging": "True"}
 
     with open(os.getcwd() + "/config.json","w+") as f:
         json.dump(configTemplate, f)
 
 token = configData["Token"]
 prefix = configData["Prefix"]
+ownerId = configData["OwnerID"]
+dmlogging = configData["DmLogging"]
 
 bot = commands.Bot(command_prefix=prefix, help_command=None)
+
+# prints, also sends dm if dmlogging is true
+async def echoToOwner(string):
+    if dmlogging == "True":
+        owner = await bot.fetch_user(ownerId) # my discord user id
+        await owner.send("OwnerLog: {}".format(string))
+    print("OwnerLog: {}".format(string))
 
 # logon message and dm when online
 @bot.event
 async def on_ready():
-    print("Logged in as {}".format(bot))
-    owner = await bot.fetch_user(224236821410873346) # my discord user id
-    await owner.send("Bot is logged in.")
-
+    await echoToOwner("Logged in as {}".format(bot))
+    
 # echoes the latency
 @bot.command()
 async def ping(ctx):
     latency = round(bot.latency * 1000,1) # return latency in ms, rounded to 1 decimal
     await ctx.send("Pong, {}ms".format(latency))
-    print("ping recieved, latency: {}ms".format(latency))
+    await echoToOwner("ping recieved, latency: {}ms".format(latency))
 
 # echoes anything you put in quotes
 @bot.command()
 async def echo(ctx, string):
     await ctx.send("Echo : {}".format(string))
-    print("Echoing {}".format(string))
+    await echoToOwner("Echoing {}".format(string))
 
 @bot.command()
 async def help(ctx):
     helpmsg = """
     <:Teoran_c:949162522336956436> Commands:
+        Dont forget quotes!
         `{pre}help` : Echoes help
         `{pre}echo "string"` : Echoes a string
         `{pre}ping` : Echoes latency
@@ -121,6 +129,6 @@ async def translate(ctx, string):
     await ctx.send("{} translates to:".format(string))
     await ctx.send(translatedString)
     
-    print("Translating '{}' To {}".format(string, translatedString))
+    await echoToOwner("Translating '{}' To {}".format(string, translatedString))
 
 bot.run(token)
