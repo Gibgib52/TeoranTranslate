@@ -26,7 +26,7 @@ else:
 token = configData["Token"]
 prefix = configData["Prefix"]
 
-bot = commands.Bot(command_prefix=prefix)
+bot = commands.Bot(command_prefix=prefix, help_command=None)
 
 # logon message
 @bot.event
@@ -45,6 +45,24 @@ async def ping(ctx):
 async def echo(ctx, string):
     await ctx.send(string)
     print("Echoing {}".format(string))
+
+@bot.command()
+async def help(ctx):
+    helpmsg = """
+    Commands:
+    `{pre}help` : Echoes help
+    `{pre}echo "string"` : Echoes a string
+    `{pre}ping` : Echoes latency
+    `{pre}translate "string"` : Translates a string into Teoran
+
+    Info:
+        Accepts any case letter but 
+        Only translates into lowercase Teoran.
+
+        `https://github.com/Gibgib52/TeoranTranslate`
+    """.format(pre=prefix)
+
+    await ctx.send(helpmsg)
 
 # echoes translation from English to Teoran.
 @bot.command()
