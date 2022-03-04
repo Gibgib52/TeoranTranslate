@@ -12,7 +12,8 @@ from discord.ext import commands
 import json
 import os
 
-# import time
+import datetime
+now = datetime.datetime.now()
 
 # token loading and config
 if os.path.exists(os.getcwd() + "/config.json"):
@@ -34,10 +35,12 @@ bot = commands.Bot(command_prefix=prefix, help_command=None)
 
 # prints, also sends dm if dmlogging is true
 async def echoToOwner(string):
+    formattedTime = datetime.time(now.hour, now.minute, now.second)
+    logstring = "[ {} ] OwnerLog: {}".format(formattedTime,string)
     if dmlogging == "True":
         owner = await bot.fetch_user(ownerId) # my discord user id
-        await owner.send("OwnerLog: {}".format(string))
-    print("OwnerLog: {}".format(string))
+        await owner.send(logstring)
+    print(logstring)
 
 # logon message and dm when online
 @bot.event
