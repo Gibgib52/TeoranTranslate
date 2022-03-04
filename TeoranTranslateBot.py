@@ -46,6 +46,7 @@ async def echoToOwner(string):
 @bot.event
 async def on_ready():
     await echoToOwner("Logged in as {}".format(bot))
+    await echoToOwner("Prefix is: {}".format(prefix))
     
 # echoes the latency
 @bot.command()
@@ -71,8 +72,8 @@ async def help(ctx):
         `{pre}translate "string"` : Translates a string into Teoran
 
     <:Teoran_g:949162522173386752> Info:
-        Accepts letters in any case but 
-        only translates into lowercase Teoran.
+        Supports letters a-z, only has lowercase Teoran
+        Does not support numbers or special characters. (Yet.)
 
     `https://github.com/Gibgib52/TeoranTranslate`
     """.format(pre=prefix)
