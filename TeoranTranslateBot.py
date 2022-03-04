@@ -28,21 +28,25 @@ prefix = configData["Prefix"]
 
 bot = commands.Bot(command_prefix=prefix)
 
+# logon message
 @bot.event
 async def on_ready():
     print("Logged in as {}".format(bot))
 
+# echoes the latency
 @bot.command()
 async def ping(ctx):
     latency = round(bot.latency * 1000,1) # return latency in ms, rounded to 1 decimal
     await ctx.send("Pong, {}ms".format(latency))
     print("ping recieved, latency: {}ms".format(latency))
 
+# echoes anything you put in quotes
 @bot.command()
 async def echo(ctx, string):
     await ctx.send(string)
     print("Echoing {}".format(string))
 
+# echoes translation from English to Teoran.
 @bot.command()
 async def translate(ctx, string):
     translateDict = {
@@ -75,10 +79,11 @@ async def translate(ctx, string):
         " ": "<:Teoran_space:949164879405780997> "
     }
 
-    preppedString = string.lower() # lower so dict can translate
+    preppedString = string.lower() # lower so capital letters dont suprise us
     translateTable = str.maketrans(translateDict)
     translatedString = preppedString.translate(translateTable) # translate string using the dict
 
+    # send the translated string and print to console
     await ctx.send(translatedString)
     print("Translating '{}' To {}".format(string, translatedString))
 
