@@ -5,6 +5,7 @@
 """
 
 import discord
+from discord.ext import commands
 
 import json
 import os
@@ -23,10 +24,16 @@ else:
 token = configData["Token"]
 prefix = configData["Prefix"]
 
-client = discord.Client()
+bot = commands.Bot(command_prefix=prefix)
 
-@client.event
+@bot.event
 async def on_ready():
-    print("Logged in as {}".format(client))
+    print("Logged in as {}".format(bot))
 
-client.run(token)
+@bot.command()
+async def ping(ctx):
+    latency = round(bot.latency * 1000)
+    await ctx.send("Pong, {}ms".format(latency))
+    print("ping recieved, latency: {}ms".format(latency))
+
+bot.run(token)
