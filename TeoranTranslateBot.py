@@ -32,8 +32,51 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    latency = round(bot.latency * 1000)
+    latency = round(bot.latency * 1000,1) # return latency in ms, rounded to 1 decimal
     await ctx.send("Pong, {}ms".format(latency))
     print("ping recieved, latency: {}ms".format(latency))
+
+@bot.command()
+async def echo(ctx, string):
+    await ctx.send(string)
+    print("Echoing {}".format(string))
+
+@bot.command()
+async def translate(ctx, string):
+    translateDict = {
+        "a": ":Teoran_a: ",
+        "b": ":Teoran_b: ",
+        "c": ":Teoran_c: ",
+        "d": ":Teoran_d: ",
+        "e": ":Teoran_e: ",
+        "f": ":Teoran_f: ",
+        "g": ":Teoran_g: ",
+        "h": ":Teoran_h: ",
+        "i": ":Teoran_i: ",
+        "j": ":Teoran_j: ",
+        "k": ":Teoran_k: ",
+        "l": ":Teoran_l: ",
+        "m": ":Teoran_m: ",
+        "n": ":Teoran_n: ",
+        "o": ":Teoran_o: ",
+        "p": ":Teoran_p: ",
+        "q": ":Teoran_q: ",
+        "r": ":Teoran_r: ",
+        "s": ":Teoran_s: ",
+        "t": ":Teoran_t: ",
+        "u": ":Teoran_u: ",
+        "v": ":Teoran_v: ",
+        "w": ":Teoran_w: ",
+        "x": ":Teoran_x: ",
+        "y": ":Teoran_y: ",
+        "z": ":Teoran_z: "
+    }
+
+    preppedString = string.lower() # lower so dict can translate
+    translateTable = str.maketrans(translateDict)
+    translatedString = preppedString.translate(translateTable) # translate string using the dict
+
+    await ctx.send(translatedString)
+    print("Translating {} To {}".format(string, translatedString))
 
 bot.run(token)
