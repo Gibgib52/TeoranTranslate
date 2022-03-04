@@ -46,32 +46,33 @@ async def echo(ctx, string):
 @bot.command()
 async def translate(ctx, string):
     translateDict = {
-        "a": ":Teoran_a: ",
-        "b": ":Teoran_b: ",
-        "c": ":Teoran_c: ",
-        "d": ":Teoran_d: ",
-        "e": ":Teoran_e: ",
-        "f": ":Teoran_f: ",
-        "g": "<:Teoran_g:949150356271673394> ",
-        "h": ":Teoran_h: ",
-        "i": ":Teoran_i: ",
-        "j": ":Teoran_j: ",
-        "k": ":Teoran_k: ",
-        "l": ":Teoran_l: ",
-        "m": ":Teoran_m: ",
-        "n": ":Teoran_n: ",
-        "o": ":Teoran_o: ",
-        "p": ":Teoran_p: ",
-        "q": ":Teoran_q: ",
-        "r": ":Teoran_r: ",
-        "s": ":Teoran_s: ",
-        "t": ":Teoran_t: ",
-        "u": ":Teoran_u: ",
-        "v": ":Teoran_v: ",
-        "w": ":Teoran_w: ",
-        "x": ":Teoran_x: ",
-        "y": ":Teoran_y: ",
-        "z": ":Teoran_z: "
+        "a": "<:Teoran_a:949162522148216882> ",
+        "b": "<:Teoran_b:949162522198556692> ",
+        "c": "<:Teoran_c:949162522336956436> ",
+        "d": "<:Teoran_d:949162521829441547> ",
+        "e": "<:Teoran_e:949162522160791552> ",
+        "f": "<:Teoran_f:949162522173374464> ",
+        "g": "<:Teoran_g:949162522173386752> ",
+        "h": "<:Teoran_h:949162522223730688> ",
+        "i": "<:Teoran_i:949162522261454898> ",
+        "j": "<:Teoran_j:949162522538303508> ",
+        "k": "<:Teoran_k:949162522269851688> ",
+        "l": "<:Teoran_l:949162522135629854> ",
+        "m": "<:Teoran_m:949162522282430524> ",
+        "n": "<:Teoran_n:949162522165002320> ",
+        "o": "<:Teoran_o:949162522169184326> ",
+        "p": "<:Teoran_p:949162522169212968> ",
+        "q": "<:Teoran_q:949162522328576000> ",
+        "r": "<:Teoran_r:949162522211127307> ",
+        "s": "<:Teoran_s:949162522303426560> ",
+        "t": "<:Teoran_t:949162521871413279> ",
+        "u": "<:Teoran_u:949162522223722527> ",
+        "v": "<:Teoran_v:949162522353762365> ",
+        "w": "<:Teoran_w:949162522215321660> ",
+        "x": "<:Teoran_x:949162521854607381> ",
+        "y": "<:Teoran_y:949162522169192488> ",
+        "z": "<:Teoran_z:949162521955299349> ",
+        " ": "<:Teoran_space:949164879405780997> "
     }
 
     preppedString = string.lower() # lower so dict can translate
@@ -79,6 +80,6 @@ async def translate(ctx, string):
     translatedString = preppedString.translate(translateTable) # translate string using the dict
 
     await ctx.send(translatedString)
-    print("Translating {} To {}".format(string, translatedString))
+    print("Translating '{}' To {}".format(string, translatedString))
 
 bot.run(token)
