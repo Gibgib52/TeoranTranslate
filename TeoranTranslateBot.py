@@ -137,18 +137,6 @@ async def translate(ctx, string):
     translatedString = preppedString.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
-    # TODO: fix size arg.
-    # if size == "s":
-    #     translatemessage = """
-    #     '{}' translates to:
-    #     {}
-    #     """
-    #     await ctx.send(translatemessage.format(preppedString, translatedString))
-    # # if invalid size or no size
-    # else:
-    #     await ctx.send("{} translates to:")
-    #     await ctx.send(translatedString)
-
     await ctx.send("{} translates to:".format(string))
     await ctx.send(translatedString)
     
