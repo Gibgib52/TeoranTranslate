@@ -66,16 +66,16 @@ async def help(ctx):
     helpmsg = """
     <:Teoran_c:949162522336956436> Commands:
         Dont forget quotes!
-        `{pre}help` : Echoes help
-        `{pre}echo "string"` : Echoes a string
-        `{pre}ping` : Echoes latency
-        `{pre}translate "string"` : Translates a string into Teoran
+        - `{pre}help` : Echoes help
+        - `{pre}echo "string"` : Echoes a string
+        - `{pre}ping` : Echoes latency
+        - `{pre}translate "string"` : Translates a string into Teoran
 
     <:Teoran_g:949162522173386752> Info:
-        Supports letters a-z, only has lowercase Teoran
-        Does not support numbers or special characters. (Yet.)
+        - Supports letters a-z, ? ; : # ! . and 0-9
+        - only has lowercase Teoran
 
-    `https://github.com/Gibgib52/TeoranTranslate`
+        <:Teoran_g:949162522173386752> <:Teoran_i:949162522261454898> <:Teoran_t:949162521871413279> : `https://github.com/Gibgib52/TeoranTranslate`
     """.format(pre=prefix)
 
     await ctx.send(helpmsg)
