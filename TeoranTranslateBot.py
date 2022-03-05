@@ -13,7 +13,6 @@ import json
 import os
 
 import datetime
-now = datetime.datetime.now()
 
 # token loading and config
 if os.path.exists(os.getcwd() + "/config.json"):
@@ -35,6 +34,7 @@ bot = commands.Bot(command_prefix=prefix, help_command=None)
 
 # prints, also sends dm if dmlogging is true
 async def echoToOwner(string):
+    now = datetime.datetime.now()
     formattedTime = datetime.time(now.hour, now.minute, now.second)
     logstring = "[ {} ] OwnerLog: {}".format(formattedTime,string)
     if dmlogging == "True":
