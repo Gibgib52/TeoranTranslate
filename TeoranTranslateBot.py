@@ -63,8 +63,7 @@ async def echo(ctx, string):
 
 @bot.command()
 async def help(ctx):
-    helpmsg = """
-    <:Teoran_c:949162522336956436> Commands:
+    helpmsg = """<:Teoran_c:949162522336956436> Commands:
         Dont forget quotes!
         - `{pre}help` : Echoes help
         - `{pre}echo "string"` : Echoes a string
@@ -129,6 +128,8 @@ translateDict = {
     "!": "<:Teoran_exclamation:949476248831291423> ",
     ".": "<:Teoran_period:949476249166811216> "
 }
+
+# translateDictReversed = {v:k for k,v in translateDict.items()} # reverses dict ex: 1:"a" becomes "a":1. Unused
 
 # echoes translation from English to Teoran.
 @bot.command()
