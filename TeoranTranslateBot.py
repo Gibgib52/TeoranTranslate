@@ -45,43 +45,43 @@ async def echoToOwner(string):
 # logon message
 @bot.event
 async def on_ready():
-    await echoToOwner("Logged in as {}".format(bot))
-    await echoToOwner("Prefix is: {}".format(prefix))
+    await echoToOwner(f"Logged in as {bot}")
+    await echoToOwner(f"Prefix is: {prefix}")
     
 # echoes the latency
 @bot.command()
 async def ping(ctx):
     latency = round(bot.latency * 1000,1) # return latency in ms, rounded to 1 decimal
-    await ctx.send("Pong, {}ms".format(latency))
-    await echoToOwner("ping recieved, latency: {}ms".format(latency))
+    await ctx.send(f"Pong, {latency}ms")
+    await echoToOwner(f"ping recieved, latency: {latency}ms")
 
 # echoes anything you put in quotes
 @bot.command()
 async def echo(ctx, string):
-    await ctx.send("Echo : {}".format(string))
-    await echoToOwner("Echoing {}".format(string))
+    await ctx.send(f"Echo : {string}")
+    await echoToOwner(f"Echoing {string}")
 
 @bot.command()
 async def help(ctx):
-    helpmsg = """<:Teoran_c:949162522336956436> Commands:
+    helpmsg = f"""<:Teoran_c:949162522336956436> Commands:
         Dont forget quotes!
-        - `{pre}help` : Echoes help
-        - `{pre}echo "string"` : Echoes a string
-        - `{pre}ping` : Echoes latency
-        - `{pre}translate "string"` : Translates a string into Teoran
-        - `{pre}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying with nitro)
+        - `{prefix}help` : Echoes help
+        - `{prefix}echo "string"` : Echoes a string
+        - `{prefix}ping` : Echoes latency
+        - `{prefix}translate "string"` : Translates a string into Teoran
+        - `{prefix}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying with nitro)
 
 <:Teoran_g:949162522173386752> Info:
     - Supports letters a-z, ? ; : # ! . and 0-9
     - only has lowercase Teoran
 
 <:Teoran_g:949162522173386752> <:Teoran_i:949162522261454898> <:Teoran_t:949162521871413279> : `https://github.com/Gibgib52/TeoranTranslate`
-    """.format(pre=prefix)
+    """
 
     await ctx.send(helpmsg)
 
 translateDict = {
-    # letters
+    # lowercase letters
     "a": "<:Teoran_a:949162522148216882> ",
     "b": "<:Teoran_b:949162522198556692> ",
     "c": "<:Teoran_c:949162522336956436> ",
@@ -120,13 +120,26 @@ translateDict = {
     "8": "<:Teoran_8:949476248898379827> ",
     "9": "<:Teoran_9:949476248957095977> ",
     "0": "<:Teoran_0:949476249301024818> ",
-    # punctuation
+    # punctuation and symbols
     "?": "<:Teoran_question:949476249070366761> ",
     ";": "<:Teoran_semicolon:949476249082937404> ",
     ":": "<:Teoran_colon:949476249095528480> ",
     "#": "<:Teoran_hash:949476248680284191> ",
     "!": "<:Teoran_exclamation:949476248831291423> ",
-    ".": "<:Teoran_period:949476249166811216> "
+    ".": "<:Teoran_period:949476249166811216> ",
+    "&": "<:Teoran_and:951664227557466194>",
+    "@": "<:Teoran_at:951664227838484580>",
+    "(": "<:Teoran_roundo:951664227586801765> ",
+    ")": "<:Teoran_roundc:951664227855237160> ",
+    "[": "<:Teoran_squareo:951664228018823208> ",
+    "]": "<:Teoran_squarec:951664227951738910> ",
+    "*": "<:Teoran_asterisk:951664227888795688> ",
+    "=": "<:Teoran_equal:951664227574251602> ",
+    "#": "<:Teoran_hash:951664227838468176> ",
+    "{": "<:Teoran_curlyo:951664227863633970> ",
+    "}": "<:Teoran_curlyc:951664227859443742> ",
+    "+": "<:Teoran_plus:951664227892985856> ",
+    "-": "<:Teoran_minus:951664227884609536> ",
 }
 
 # translateDictReversed = {v:k for k,v in translateDict.items()} # reverses dict ex: 1:"a" becomes "a":1. Unused
@@ -140,12 +153,12 @@ async def translate(ctx, string):
     translatedString = preppedString.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
-    await ctx.send("'{}' translates to:".format(string))
+    await ctx.send(f"'{string}' translates to:")
     await ctx.send(translatedString)
     
-    await echoToOwner("Translating '{}' To {}".format(string, translatedString))
+    await echoToOwner(f"Translating '{string}' To {translatedString}")
 
-# echoes translation from English to Teoran.
+# echoes translation from English to Teoran in emoji ids.
 @bot.command()
 async def translateRaw(ctx, string):
     
@@ -154,9 +167,9 @@ async def translateRaw(ctx, string):
     translatedString = preppedString.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
-    await ctx.send("'{}' raw translates to:".format(string))
-    await ctx.send("`{}`".format(translatedString))
+    await ctx.send(f"'{string}' raw translates to:")
+    await ctx.send(f"`{translatedString}`")
     
-    await echoToOwner("Raw Translating '{}' To {}".format(string, translatedString))
+    await echoToOwner(f"Raw Translating '{string}' To {translatedString}")
 
 bot.run(token)
