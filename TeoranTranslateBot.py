@@ -74,9 +74,9 @@ async def help(ctx):
 
 <:Teoran_g:949162522173386752> Info:
     - Supports letters a-z, symbols and 0-9
-    - only has lowercase Teoran
+    - Contact me if you find a bug. `Gibgib52#6473`
 
-<:Teoran_g:949162522173386752> <:Teoran_i:949162522261454898> <:Teoran_t:949162521871413279> : `https://github.com/Gibgib52/TeoranTranslate`
+<:Teoran_g:949162522173386752> <:Teoran_i:949162522261454898> <:Teoran_tc:951687057384824912> : `https://github.com/Gibgib52/TeoranTranslate`
     """
 
     await ctx.send(helpmsg)
