@@ -110,8 +110,8 @@ helpmsg = """<:Teoran_c:949162522336956436> Commands:
         - `{p}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
 
 <:Teoran_g:949162522173386752> Info:
-    - Supports letters a-z, symbols and 0-9
-    - Contact me if you find a bug. `Gibgib52#6473`
+    - Supports letters, symbols and 0-9
+    - Contact me if you find a bug. `Gibgib52#6473`. I'm usually available from 4pm - 11pm CST
 
 <:Teoran_g:949162522173386752> <:Teoran_i:949162522261454898> <:Teoran_tc:951687057384824912> : `https://github.com/Gibgib52/TeoranTranslate`
 """
