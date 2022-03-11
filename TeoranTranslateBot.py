@@ -69,10 +69,10 @@ async def help(ctx):
         - `{prefix}echo "string"` : Echoes a string
         - `{prefix}ping` : Echoes latency
         - `{prefix}translate "string"` : Translates a string into Teoran
-        - `{prefix}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying with nitro)
+        - `{prefix}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
 
 <:Teoran_g:949162522173386752> Info:
-    - Supports letters a-z, ? ; : # ! . and 0-9
+    - Supports letters a-z, symbols and 0-9
     - only has lowercase Teoran
 
 <:Teoran_g:949162522173386752> <:Teoran_i:949162522261454898> <:Teoran_t:949162521871413279> : `https://github.com/Gibgib52/TeoranTranslate`
@@ -81,7 +81,7 @@ async def help(ctx):
     await ctx.send(helpmsg)
 
 translateDict = {
-    # lowercase letters
+    # lowercase letters and space
     "a": "<:Teoran_a:949162522148216882> ",
     "b": "<:Teoran_b:949162522198556692> ",
     "c": "<:Teoran_c:949162522336956436> ",
@@ -109,6 +109,33 @@ translateDict = {
     "y": "<:Teoran_y:949162522169192488> ",
     "z": "<:Teoran_z:949162521955299349> ",
     " ": "<:Teoran_space:949164879405780997> ",
+    # uppercase letters
+    "A": "<:Teoran_ac:951687057435156500> ",
+    "B": "<:Teoran_b:949162522198556692> ",
+    "C": "<:Teoran_cc:951687057359663155> ",
+    "D": "<:Teoran_dc:951687057573548102> ",
+    "E": "<:Teoran_ec:951687057468719124> ",
+    "F": "<:Teoran_fc:951687057422557194> ",
+    "G": "<:Teoran_gc:951687057074434069> ",
+    "H": "<:Teoran_h:949162522223730688> ",
+    "I": "<:Teoran_i:949162522261454898> ",
+    "j": "<:Teoran_jc:951687057409970206> ",
+    "K": "<:Teoran_k:949162522269851688> ",
+    "L": "<:Teoran_lc:951687057414172712> ",
+    "M": "<:Teoran_mc:951687057292525610> ",
+    "N": "<:Teoran_nc:951687057640661042> ",
+    "O": "<:Teoran_o:949162522169184326> ",
+    "P": "<:Teoran_pc:951687057510649876> ",
+    "Q": "<:Teoran_qc:951687057409970266> ",
+    "R": "<:Teoran_rc:951687057393197177> ",
+    "S": "<:Teoran_s:949162522303426560> ",
+    "T": "<:Teoran_tc:951687057384824912> ",
+    "U": "<:Teoran_uc:951687057485480006> ",
+    "V": "<:Teoran_vc:951687057565184040> ",
+    "W": "<:Teoran_wc:951687057414189066> ",
+    "X": "<:Teoran_x:949162521854607381> ",
+    "Y": "<:Teoran_yc:951687057472913418> ",
+    "Z": "<:Teoran_z:949162521955299349> ",
     # numbers
     "1": "<:Teoran_1:949476249309425675> ",
     "2": "<:Teoran_2:949476249208774736> ",
@@ -140,6 +167,14 @@ translateDict = {
     "}": "<:Teoran_curlyc:951664227859443742> ",
     "+": "<:Teoran_plus:951664227892985856> ",
     "-": "<:Teoran_minus:951664227884609536> ",
+    "$": "<:Teoran_dollar:951686257560387584> ",
+    '"': "<:Teoran_doublequote:951686257828827136> ",
+    "'": "<:Teoran_quote:951686257447161957> ",
+    ">": "<:Teoran_greaterthan:951686257535234058> ",
+    "<": "<:Teoran_lessthan:951686257619124264> ",
+    "_": "<:Teoran_underscore:951686257187119185> ",
+    "%": "<:Teoran_percent:951686257380057110> ",
+    "^": "<:Teoran_pow:951686257275195424> "
 }
 
 # translateDictReversed = {v:k for k,v in translateDict.items()} # reverses dict ex: 1:"a" becomes "a":1. Unused
@@ -148,9 +183,8 @@ translateDict = {
 @bot.command()
 async def translate(ctx, string):
     
-    preppedString = string.lower() # lower so capital letters dont suprise us
     translateTable = str.maketrans(translateDict)
-    translatedString = preppedString.translate(translateTable) # translate string using the dict
+    translatedString = string.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
     await ctx.send(f"'{string}' translates to:")
@@ -162,9 +196,8 @@ async def translate(ctx, string):
 @bot.command()
 async def translateRaw(ctx, string):
     
-    preppedString = string.lower() # lower so capital letters dont suprise us
     translateTable = str.maketrans(translateDict)
-    translatedString = preppedString.translate(translateTable) # translate string using the dict
+    translatedString = string.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
     await ctx.send(f"'{string}' raw translates to:")
