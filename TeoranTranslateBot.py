@@ -13,7 +13,8 @@ import json
 import os
 import datetime
 
-from TransTable import translateDict
+# import translation tables, help message and other data.
+from TeoranTranslateData import *
 
 # token loading and config
 if os.path.exists(os.getcwd() + "/config.json"):
@@ -31,9 +32,10 @@ prefix = configData["Prefix"]
 ownerId = configData["OwnerID"]
 dmlogging = configData["DmLogging"]
 
+# sets prefix and removes default help command
 bot = commands.Bot(command_prefix=prefix, help_command=None)
 
-# prints, also sends dm if dmlogging is true
+# prints, also sends a dm if dmlogging is true
 async def echoToOwner(string):
     now = datetime.datetime.now()
     formattedTime = datetime.time(now.hour, now.minute, now.second)
@@ -64,29 +66,15 @@ async def echo(ctx, string):
 
 @bot.command()
 async def help(ctx):
-    helpmsg = f"""<:Teoran_c:949162522336956436> Commands:
-        Dont forget quotes!
-        - `{prefix}help` : Echoes help
-        - `{prefix}echo "string"` : Echoes a string
-        - `{prefix}ping` : Echoes latency
-        - `{prefix}translate "string"` : Translates a string into Teoran
-        - `{prefix}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
-
-<:Teoran_g:949162522173386752> Info:
-    - Supports letters a-z, symbols and 0-9
-    - Contact me if you find a bug. `Gibgib52#6473`
-
-<:Teoran_g:949162522173386752> <:Teoran_i:949162522261454898> <:Teoran_tc:951687057384824912> : `https://github.com/Gibgib52/TeoranTranslate`
-    """
-
-    await ctx.send(helpmsg)
+    # helpmsg is in TeoranTranslateData.py
+    await ctx.send(helpmsg.format(p = prefix))
 
 # translateDictReversed = {v:k for k,v in translateDict.items()} # reverses dict ex: 1:"a" becomes "a":1. Unused
 
 # echoes translation from English to Teoran.
 @bot.command()
 async def translate(ctx, string):
-    
+    # translateTable provided by TeoranTranslateData.py
     translateTable = str.maketrans(translateDict)
     translatedString = string.translate(translateTable) # translate string using the dict
 
@@ -99,7 +87,7 @@ async def translate(ctx, string):
 # echoes translation from English to Teoran in emoji ids (for copying with nitro).
 @bot.command()
 async def translateRaw(ctx, string):
-    
+    # translateTable provided by TeoranTranslateData.py
     translateTable = str.maketrans(translateDict)
     translatedString = string.translate(translateTable) # translate string using the dict
 
