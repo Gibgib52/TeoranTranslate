@@ -13,7 +13,7 @@ import json
 import os
 import datetime
 
-# import translation tables, help message and other data.
+# import translation tables, help message.
 from TeoranTranslateData import *
 
 # token loading and config
@@ -36,7 +36,7 @@ dmlogging = configData["DmLogging"]
 bot = commands.Bot(command_prefix=prefix, help_command=None)
 
 # prints, also sends a dm if dmlogging is true
-async def echoToOwner(string):
+async def botLog(string):
     now = datetime.datetime.now()
     formattedTime = datetime.time(now.hour, now.minute, now.second)
     logstring = "[ {} ] OwnerLog: {}".format(formattedTime,string)
@@ -48,21 +48,21 @@ async def echoToOwner(string):
 # logon message
 @bot.event
 async def on_ready():
-    await echoToOwner(f"Logged in as {bot}")
-    await echoToOwner(f"Prefix is: {prefix}")
+    await botLog(f"Logged in as {bot}")
+    await botLog(f"Prefix is: {prefix}")
     
 # echoes the latency
 @bot.command()
 async def ping(ctx):
     latency = round(bot.latency * 1000,1) # return latency in ms, rounded to 1 decimal
     await ctx.send(f"Pong, {latency}ms")
-    await echoToOwner(f"ping recieved, latency: {latency}ms")
+    await botLog(f"ping recieved, latency: {latency}ms")
 
 # echoes anything you put in quotes
 @bot.command()
 async def echo(ctx, string):
     await ctx.send(f"Echo : {string}")
-    await echoToOwner(f"Echoing {string}")
+    await botLog(f"Echoing {string}")
 
 @bot.command()
 async def help(ctx):
@@ -82,7 +82,7 @@ async def translate(ctx, string):
     await ctx.send(f"'{string}' translates to:")
     await ctx.send(translatedString)
     
-    await echoToOwner(f"Translating '{string}' To {translatedString}")
+    await botLog(f"Translating '{string}' To {translatedString}")
 
 # echoes translation from English to Teoran in emoji ids (for copying with nitro).
 @bot.command()
@@ -95,6 +95,6 @@ async def translateRaw(ctx, string):
     await ctx.send(f"'{string}' raw translates to:")
     await ctx.send(f"`{translatedString}`")
     
-    await echoToOwner(f"Raw Translating '{string}' To {translatedString}")
+    await botLog(f"Raw Translating '{string}' To {translatedString}")
 
-bot.run(token)
+bot.run(token) # 100 lines :D
