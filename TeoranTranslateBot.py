@@ -32,6 +32,8 @@ prefix = configData["Prefix"]
 ownerId = configData["OwnerID"]
 dmlogging = configData["DmLogging"]
 
+startTime = datetime.datetime.now() # start time
+
 # sets prefix and removes default help command
 bot = commands.Bot(command_prefix=prefix, help_command=None)
 
@@ -96,5 +98,19 @@ async def translateRaw(ctx, string):
     await ctx.send(f"`{translatedString}`")
     
     await botLog(f"Raw Translating '{string}' To {translatedString}")
+
+# echoes uptime
+@bot.command()
+async def uptime(ctx):
+    # TODO: complete uptime command
+    now = datetime.datetime.now()
+    uptimeTime = str(now - startTime)
+    uptimeTimeFormatted = str(uptimeTime)
+    uptimeMsg = f"""Start time: {startTime}
+Uptime: {uptimeTimeFormatted}
+    """
+
+    await botLog("Uptime message recieved. " + uptimeMsg)
+    await ctx.send(uptimeMsg)
 
 bot.run(token) # 100 lines :D
