@@ -102,15 +102,18 @@ async def translateRaw(ctx, string):
 # echoes uptime
 @bot.command()
 async def uptime(ctx):
-    # TODO: complete uptime command
     now = datetime.datetime.now()
-    uptimeTime = now - startTime
-    startTimeReadable = startTime.strftime("%d/%m/%y %H:%M:%S")
-    uptimeMsg = f"""Start time: {startTimeReadable}
-Uptime: {uptimeTime}
+
+    uptimeDelta = now - startTime
+    uptimeDeltaFormatted = str(uptimeDelta).split(".")[0] # uptimeDelta to a string, split microseconds and only use HH:MM:SS
+
+    startTimeFormatted = startTime.strftime("%d/%m/%y %H:%M:%S") # day/month/year hours:minutes:seconds
+
+    uptimeMsg = f"""Start time: `{startTimeFormatted}`
+Uptime: `{uptimeDeltaFormatted}`
     """
     
     await botLog("Uptime message recieved. " + uptimeMsg)
     await ctx.send(uptimeMsg)
 
-bot.run(token) # 100 lines :D
+bot.run(token)
