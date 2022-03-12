@@ -94,7 +94,7 @@ async def translateRaw(ctx, string):
     translatedString = string.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
-    await ctx.send(f"'{string}' raw translates to:")
+    await ctx.send(f"'{string}' raw translates to: (Copy and paste with nitro)")
     await ctx.send(f"`{translatedString}`")
     
     await botLog(f"Raw Translating '{string}' To {translatedString}")
@@ -104,12 +104,12 @@ async def translateRaw(ctx, string):
 async def uptime(ctx):
     # TODO: complete uptime command
     now = datetime.datetime.now()
-    uptimeTime = str(now - startTime)
-    uptimeTimeFormatted = str(uptimeTime)
-    uptimeMsg = f"""Start time: {startTime}
-Uptime: {uptimeTimeFormatted}
+    uptimeTime = now - startTime
+    startTimeReadable = startTime.strftime("%d/%m/%y %H:%M:%S")
+    uptimeMsg = f"""Start time: {startTimeReadable}
+Uptime: {uptimeTime}
     """
-
+    
     await botLog("Uptime message recieved. " + uptimeMsg)
     await ctx.send(uptimeMsg)
 
