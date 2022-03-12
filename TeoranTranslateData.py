@@ -105,7 +105,8 @@ helpmsg = """<:Teoran_c:949162522336956436> Commands:
         Dont forget quotes!
         - `{p}help` : Echoes help
         - `{p}echo "string"` : Echoes a string
-        - `{p}ping` : Echoes latency
+        - `{p}ping` : Echoes latency of bot
+        - `{p}uptime` : Echoes uptime of bot
         - `{p}translate "string"` : Translates a string into Teoran
         - `{p}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
         Examples
