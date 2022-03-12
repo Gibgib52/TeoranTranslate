@@ -108,6 +108,9 @@ helpmsg = """<:Teoran_c:949162522336956436> Commands:
         - `{p}ping` : Echoes latency
         - `{p}translate "string"` : Translates a string into Teoran
         - `{p}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
+        Examples
+        Correct: `$translate "Geo Ami"` translates "Geo Ami"
+        Incorrect: `$translate "Marlow" "Deva"` only translates "Marlow"
 
 <:Teoran_g:949162522173386752> Info:
     - Supports letters, symbols and 0-9
