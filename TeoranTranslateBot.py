@@ -14,7 +14,7 @@ import os
 import datetime
 
 # import translation tables, help message.
-from TeoranTranslateData import *
+import TeoranTranslateData as Tdata
 
 # token loading and config
 if os.path.exists(os.getcwd() + "/config.json"):
@@ -69,15 +69,15 @@ async def echo(ctx, string):
 @bot.command()
 async def help(ctx):
     # helpmsg is in TeoranTranslateData.py
-    await ctx.send(helpmsg.format(p = prefix))
+    await ctx.send(Tdata.helpmsg.format(p = prefix))
 
 # translateDictReversed = {v:k for k,v in translateDict.items()} # reverses dict ex: 1:"a" becomes "a":1. Unused
 
 # echoes translation from English to Teoran.
 @bot.command()
 async def translate(ctx, string):
-    # translateTable provided by TeoranTranslateData.py
-    translateTable = str.maketrans(translateDict)
+# translateTable provided by TeoranTranslateData.py
+    translateTable = str.maketrans(Tdata.translateDict)
     translatedString = string.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console
@@ -86,11 +86,27 @@ async def translate(ctx, string):
     
     await botLog(f"Translating '{string}' To {translatedString}")
 
+# echoes translation from English to Teoran ignoring caps and using easy to read letters.
+@bot.command()
+async def translateEasy(ctx, string):
+    easyTable = str.maketrans(Tdata.easyDict)
+    easyString = string.translate(easyTable)
+
+    # translateTable provided by TeoranTranslateData.py
+    translateTable = str.maketrans(Tdata.translateDict)
+    translatedString = easyString.translate(translateTable) # translate string using the dict
+
+    # send the translated string and print to console
+    await ctx.send(f"'{easyString}' easy translates to:")
+    await ctx.send(translatedString)
+    
+    await botLog(f"EasyTranslating '{string}' To {translatedString}")
+
 # echoes translation from English to Teoran in emoji ids (for copying with nitro).
 @bot.command()
 async def translateRaw(ctx, string):
     # translateTable provided by TeoranTranslateData.py
-    translateTable = str.maketrans(translateDict)
+    translateTable = str.maketrans(Tdata.translateDict)
     translatedString = string.translate(translateTable) # translate string using the dict
 
     # send the translated string and print to console

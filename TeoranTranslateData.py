@@ -100,6 +100,36 @@ translateDict = {
     "^": "<:Teoran_pow:951686257275195424> "
 }
 
+# converts letters to easy to read letters.
+easyDict = {
+    "a": "A",
+    "b": "b",
+    "c": "C",
+    "d": "D",
+    "e": "E",
+    "f": "f",
+    "g": "g",
+    "h": "h",
+    "i": "i",
+    "j": "j",
+    "k": "k",
+    "l": "L",
+    "m": "M",
+    "n": "N",
+    "o": "o",
+    "p": "P",
+    "q": "q",
+    "r": "r",
+    "s": "s",
+    "t": "T",
+    "u": "u",
+    "v": "V",
+    "w": "W",
+    "x": "x",
+    "y": "y",
+    "z": "z"
+}
+
 # help message for the {prefix}help command
 helpmsg = """<:Teoran_c:949162522336956436> Commands:
         Dont forget quotes!
@@ -109,6 +139,8 @@ helpmsg = """<:Teoran_c:949162522336956436> Commands:
         - `{p}uptime` : Echoes uptime of bot
         - `{p}translate "string"` : Translates a string into Teoran
         - `{p}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
+        - `{p}translateEasy "string"` : Translates a string into easy to read Teoran.
+        
         Examples
         Correct: `$translate "Geo Ami"` translates "Geo Ami"
         Incorrect: `$translate "Marlow" "Deva"` only translates "Marlow"
