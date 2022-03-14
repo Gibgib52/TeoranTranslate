@@ -141,18 +141,22 @@ easyDict = {
 
 # help message for the {prefix}help command
 helpmsg = """<:Teoran_c:949162522336956436> Commands:
-        Dont forget quotes!
-        - `{p}help` : Echoes help
-        - `{p}echo "string"` : Echoes a string
-        - `{p}ping` : Echoes latency of bot
-        - `{p}uptime` : Echoes uptime of bot
-        - `{p}translate "string"` : Translates a string into Teoran
-        - `{p}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
-        - `{p}translateEasy "string"` : Translates a string into easy to read Teoran.
+Dont forget quotes!
+- `{p}help` : Echoes help
+- `{p}echo "string"` : Echoes a string
+- `{p}ping` : Echoes latency of bot
+- `{p}uptime` : Echoes uptime of bot
+- `{p}translate "string"` : Translates a string into Teoran
+- `{p}translateRaw "string"` : Translates a string into Teoran emoji ids (for copying, if you have nitro)
+- `{p}translateEasy "string"` : Translates a string into easy to read Teoran.
         
-        Examples
-        Correct: `$translate "Geo Ami"` translates "Geo Ami"
-        Incorrect: `$translate "Marlow" "Deva"` only translates "Marlow"
+<:Teoran_e:949162522160791552> Examples:
+Correct:
+`$translate "Geo Ami"` translates "Geo Ami".
+`$translate Gwain` translates "Gwain".
+Incorrect:
+`$translate "Marlow" "Deva"` only translates "Marlow".
+`$translate Lanney Agni` only translates "Agni".
 
 <:Teoran_g:949162522173386752> Info:
     - Supports letters, symbols and 0-9
