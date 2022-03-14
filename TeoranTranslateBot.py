@@ -113,6 +113,19 @@ async def translateRaw(ctx, string):
     
     await botLog(f"Raw Translating '{string}' To {translatedString}")
 
+# translates from teoran to english
+@bot.command()
+async def translateRev(ctx, string):
+# translateTable provided by TeoranTranslateData.py
+    translateTable = str.maketrans(Tdata.translateRevDict)
+    translatedString = string.translate(translateTable) # translate string using the dict
+
+    # send the translated string and print to console
+    await ctx.send(f"'{string}' reverse translates to:")
+    await ctx.send(translatedString)
+    
+    await botLog(f"Reverse Translating '{string}' To {translatedString}")
+
 # echoes uptime
 @bot.command()
 async def uptime(ctx):

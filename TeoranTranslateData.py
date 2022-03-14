@@ -2,7 +2,7 @@
 Contains translation tables and other data.
 """
 
-# dictionary for translation
+# dictionary for translation from english to teoran
 translateDict = {
     # lowercase letters and space
     "a": "<:Teoran_a:949162522148216882> ",
@@ -99,6 +99,13 @@ translateDict = {
     "%": "<:Teoran_percent:951686257380057110> ",
     "^": "<:Teoran_pow:951686257275195424> "
 }
+# print(translateDict)
+
+# dict for translating teoran to english
+translateRevDict = dict(zip(translateDict.values(), translateDict.keys()))
+# for k, v in translateDict.items():
+    # translateRevDict[v] = translateRevDict.get(v, []) + [k]
+print(translateRevDict)
 
 # converts letters to easy to read letters.
 easyDict = {
