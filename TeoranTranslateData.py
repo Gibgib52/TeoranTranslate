@@ -101,11 +101,13 @@ translateDict = {
 }
 # print(translateDict)
 
-# dict for translating teoran to english
+# dict for translating teoran to english (translateDict but reversed)
 translateRevDict = dict(zip(translateDict.values(), translateDict.keys()))
-# for k, v in translateDict.items():
-    # translateRevDict[v] = translateRevDict.get(v, []) + [k]
-print(translateRevDict)
+
+# runs .strip() on keys
+# translateRevDict = {k.strip(): v for (k, v) in translateRevDict.items()}
+
+# print(translateRevDict)
 
 # converts letters to easy to read letters.
 easyDict = {

@@ -117,12 +117,21 @@ async def translateRaw(ctx, string):
 @bot.command()
 async def translateRev(ctx, string):
 # translateTable provided by TeoranTranslateData.py
-    translateTable = str.maketrans(Tdata.translateRevDict)
-    translatedString = string.translate(translateTable) # translate string using the dict
+    translateTableRev = Tdata.translateRevDict
+    splitList = string.split(" ") # split on space
+    translatedString = ""
+
+    # add space to end of each val in splitList
+    splitList = [ "{} ".format(key) for key in splitList ]
+
+    # translate splitList
+    for val in splitList:
+        if val in translateTableRev:
+            translatedString += translateTableRev[val]
 
     # send the translated string and print to console
     await ctx.send(f"'{string}' reverse translates to:")
-    await ctx.send(translatedString)
+    await ctx.send(f"`{translatedString}`")
     
     await botLog(f"Reverse Translating '{string}' To {translatedString}")
 
