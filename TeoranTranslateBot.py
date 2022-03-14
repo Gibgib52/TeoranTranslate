@@ -52,7 +52,7 @@ async def botLog(string):
 async def on_ready():
     await botLog(f"Logged in as {bot}")
     await botLog(f"Prefix is: {prefix}")
-    
+
 # echoes the latency
 @bot.command()
 async def ping(ctx):
@@ -70,8 +70,6 @@ async def echo(ctx, string):
 async def help(ctx):
     # helpmsg is in TeoranTranslateData.py
     await ctx.send(Tdata.helpmsg.format(p = prefix))
-
-# translateDictReversed = {v:k for k,v in translateDict.items()} # reverses dict ex: 1:"a" becomes "a":1. Unused
 
 # echoes translation from English to Teoran.
 @bot.command()
@@ -119,6 +117,7 @@ async def translateRaw(ctx, string):
 @bot.command()
 async def uptime(ctx):
     now = datetime.datetime.now()
+    nowFormatted = now.strftime("%d/%m/%y %H:%M:%S")
 
     uptimeDelta = now - startTime
     uptimeDeltaFormatted = str(uptimeDelta).split(".")[0] # uptimeDelta to a string, split microseconds and only use HH:MM:SS
@@ -126,6 +125,7 @@ async def uptime(ctx):
     startTimeFormatted = startTime.strftime("%d/%m/%y %H:%M:%S") # day/month/year hours:minutes:seconds
 
     uptimeMsg = f"""Start time: `{startTimeFormatted}`
+Now time: `{nowFormatted}`
 Uptime: `{uptimeDeltaFormatted}`
     """
     
