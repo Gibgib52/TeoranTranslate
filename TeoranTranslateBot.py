@@ -7,6 +7,7 @@
 """
 
 from ast import Return
+from ftplib import Error
 from http.client import HTTPException
 import discord
 from discord.ext import commands
@@ -86,12 +87,12 @@ async def translateEasy(ctx, string):
 # echoes translation from English to Teoran in emoji ids (for copying with nitro).
 @bot.command()
 async def translateRaw(ctx, string):
-    translate.raw(ctx, string)
+    await translate.raw(ctx, string)
 
 # translates from teoran to english
 @bot.command()
 async def translateRev(ctx, string):
-    translate.reverse(ctx, string)
+    await translate.reverse(ctx, string)
 
 # echoes uptime
 @bot.command()
@@ -120,7 +121,7 @@ class translate:
             lenErrorString = f"Error: Translated string ({len(translatedString)}) is greater than 2000 chars. shorten your string."
             await ctx.send(lenErrorString)
             await botLog(lenErrorString)
-            return
+            raise ValueError(lenErrorString)
 
     # echoes translation from English to Teoran.
     async def normal(ctx, string):
@@ -128,7 +129,8 @@ class translate:
         translateTable = str.maketrans(Tdata.translateDict)
         translatedString = string.translate(translateTable) # translate string using the dict
 
-        translate.lenCheck(ctx, translatedString)
+        # if msg too big raise error
+        await translate.lenCheck(ctx, translatedString)
 
         # send the translated string and print to console
         await ctx.send(f"'{string}' translates to:")
@@ -151,7 +153,8 @@ class translate:
             if val in translateTableRev:
                 translatedString += translateTableRev[val]
 
-        translate.lenCheck(ctx, translatedString)
+        # if msg too big raise error
+        await translate.lenCheck(ctx, translatedString)
 
         # send the translated string and print to console
         await ctx.send(f"'{string}' reverse translates to:")
@@ -165,7 +168,8 @@ class translate:
         translateTable = str.maketrans(Tdata.translateDict)
         translatedString = string.translate(translateTable) # translate string using the dict
 
-        translate.lenCheck(ctx, translatedString)
+        # if msg too big raise error
+        await translate.lenCheck(ctx, translatedString)
 
         # send the translated string and print to console
         await ctx.send(f"'{string}' raw translates to: (Copy and paste with nitro)")
@@ -182,7 +186,8 @@ class translate:
         translateTable = str.maketrans(Tdata.translateDict)
         translatedString = easyString.translate(translateTable) # translate string using the dict
 
-        translate.lenCheck(translatedString)
+        # if msg too big raise error
+        await translate.lenCheck(ctx, translatedString)
 
         # send the translated string and print to console
         await ctx.send(f"'{easyString}' easy translates to:")
