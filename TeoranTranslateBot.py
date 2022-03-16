@@ -6,6 +6,8 @@
     uses Teoran Font v1.04 from https://fontstruct.com/fontstructions/show/1833685/teoran-font-v1-04 in the discord server for emojis
 """
 
+from ast import Return
+from http.client import HTTPException
 import discord
 from discord.ext import commands
 
@@ -73,67 +75,23 @@ async def help(ctx):
 
 # echoes translation from English to Teoran.
 @bot.command()
-async def translate(ctx, string):
-# translateTable provided by TeoranTranslateData.py
-    translateTable = str.maketrans(Tdata.translateDict)
-    translatedString = string.translate(translateTable) # translate string using the dict
-
-    # send the translated string and print to console
-    await ctx.send(f"'{string}' translates to:")
-    await ctx.send(translatedString)
-    
-    await botLog(f"Translating '{string}' To {translatedString}")
+async def translate(ctx, mode, string):
+    await translate.normal(ctx, string)
 
 # echoes translation from English to Teoran ignoring caps and using easy to read letters.
 @bot.command()
 async def translateEasy(ctx, string):
-    easyTable = str.maketrans(Tdata.easyDict)
-    easyString = string.translate(easyTable)
-
-    # translateTable provided by TeoranTranslateData.py
-    translateTable = str.maketrans(Tdata.translateDict)
-    translatedString = easyString.translate(translateTable) # translate string using the dict
-
-    # send the translated string and print to console
-    await ctx.send(f"'{easyString}' easy translates to:")
-    await ctx.send(translatedString)
-    
-    await botLog(f"EasyTranslating '{string}' To {translatedString}")
+    await translate.easy(ctx, string)
 
 # echoes translation from English to Teoran in emoji ids (for copying with nitro).
 @bot.command()
 async def translateRaw(ctx, string):
-    # translateTable provided by TeoranTranslateData.py
-    translateTable = str.maketrans(Tdata.translateDict)
-    translatedString = string.translate(translateTable) # translate string using the dict
-
-    # send the translated string and print to console
-    await ctx.send(f"'{string}' raw translates to: (Copy and paste with nitro)")
-    await ctx.send(f"`{translatedString}`")
-    
-    await botLog(f"Raw Translating '{string}' To {translatedString}")
+    translate.raw(ctx, string)
 
 # translates from teoran to english
 @bot.command()
 async def translateRev(ctx, string):
-# translateTable provided by TeoranTranslateData.py
-    translateTableRev = Tdata.translateRevDict
-    splitList = string.split(" ") # split on space
-    translatedString = ""
-
-    # add space to end of each val in splitList
-    splitList = [ "{} ".format(key) for key in splitList ]
-
-    # translate splitList
-    for val in splitList:
-        if val in translateTableRev:
-            translatedString += translateTableRev[val]
-
-    # send the translated string and print to console
-    await ctx.send(f"'{string}' reverse translates to:")
-    await ctx.send(f"`{translatedString}`")
-    
-    await botLog(f"Reverse Translating '{string}' To {translatedString}")
+    translate.reverse(ctx, string)
 
 # echoes uptime
 @bot.command()
@@ -153,5 +111,83 @@ Uptime: `{uptimeDeltaFormatted}`
     
     await botLog("Uptime message recieved. " + uptimeMsg)
     await ctx.send(uptimeMsg)
+
+# contains all the translation fucntions
+class translate:
+    # Check if translated string is > 2000 chars, if it is then message and return
+    async def lenCheck(ctx, translatedString):
+        if len(translatedString) > 2000:
+            lenErrorString = f"Error: Translated string ({len(translatedString)}) is greater than 2000 chars. shorten your string."
+            await ctx.send(lenErrorString)
+            await botLog(lenErrorString)
+            return
+
+    # echoes translation from English to Teoran.
+    async def normal(ctx, string):
+        # translateTable provided by TeoranTranslateData.py
+        translateTable = str.maketrans(Tdata.translateDict)
+        translatedString = string.translate(translateTable) # translate string using the dict
+
+        translate.lenCheck(ctx, translatedString)
+
+        # send the translated string and print to console
+        await ctx.send(f"'{string}' translates to:")
+        await ctx.send(translatedString)
+        
+        await botLog(f"Translating '{string}' To {translatedString}")
+
+    # translates from teoran to english
+    async def reverse(ctx, string):
+        # translateTable provided by TeoranTranslateData.py
+        translateTableRev = Tdata.translateRevDict
+        splitList = string.split(" ") # split on space
+        translatedString = ""
+
+        # add space to end of each val in splitList
+        splitList = [ "{} ".format(key) for key in splitList ]
+
+        # translate splitList
+        for val in splitList:
+            if val in translateTableRev:
+                translatedString += translateTableRev[val]
+
+        translate.lenCheck(ctx, translatedString)
+
+        # send the translated string and print to console
+        await ctx.send(f"'{string}' reverse translates to:")
+        await ctx.send(f"`{translatedString}`")
+        
+        await botLog(f"Reverse Translating '{string}' To {translatedString}")
+
+    # echoes translation from English to Teoran in emoji ids (for copying with nitro).
+    async def raw(ctx, string):
+        # translateTable provided by TeoranTranslateData.py
+        translateTable = str.maketrans(Tdata.translateDict)
+        translatedString = string.translate(translateTable) # translate string using the dict
+
+        translate.lenCheck(ctx, translatedString)
+
+        # send the translated string and print to console
+        await ctx.send(f"'{string}' raw translates to: (Copy and paste with nitro)")
+        await ctx.send(f"`{translatedString}`")
+        
+        await botLog(f"Raw Translating '{string}' To {translatedString}")
+
+    # echoes translation from English to Teoran ignoring caps and using easy to read letters.
+    async def easy(ctx, string):
+        easyTable = str.maketrans(Tdata.easyDict)
+        easyString = string.translate(easyTable)
+
+        # translateTable provided by TeoranTranslateData.py
+        translateTable = str.maketrans(Tdata.translateDict)
+        translatedString = easyString.translate(translateTable) # translate string using the dict
+
+        translate.lenCheck(translatedString)
+
+        # send the translated string and print to console
+        await ctx.send(f"'{easyString}' easy translates to:")
+        await ctx.send(translatedString)
+        
+        await botLog(f"EasyTranslating '{string}' To {translatedString}")
 
 bot.run(token)
