@@ -75,7 +75,7 @@ async def help(ctx):
 
 # echoes translation from English to Teoran.
 @bot.command()
-async def translate(ctx, mode, string):
+async def translate(ctx, string):
     await translate.normal(ctx, string)
 
 # echoes translation from English to Teoran ignoring caps and using easy to read letters.
