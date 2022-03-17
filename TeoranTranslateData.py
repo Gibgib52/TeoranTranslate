@@ -156,7 +156,7 @@ Correct:
 `$translate Gwain` translates "Gwain".
 Incorrect:
 `$translate "Marlow" "Deva"` only translates "Marlow".
-`$translate Lanney Agni` only translates "Agni".
+`$translate Lanney Agni` only translates "Lanney".
 
 <:Teoran_g:949162522173386752> Info:
     - Supports letters, symbols and 0-9
