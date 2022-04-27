@@ -1,6 +1,4 @@
-"""
-Contains translation tables and other data.
-"""
+# Contains translation tables and other data.
 
 # dictionary for translation from english to teoran
 translateDict = {
@@ -99,15 +97,9 @@ translateDict = {
     "%": "<:Teoran_percent:951686257380057110> ",
     "^": "<:Teoran_pow:951686257275195424> "
 }
-# print(translateDict)
 
 # dict for translating teoran to english (translateDict but reversed)
 translateRevDict = dict(zip(translateDict.values(), translateDict.keys()))
-
-# runs .strip() on keys
-# translateRevDict = {k.strip(): v for (k, v) in translateRevDict.items()}
-
-# print(translateRevDict)
 
 # converts letters to easy to read letters.
 easyDict = {
